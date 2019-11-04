@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>
+创建一个简单的电子地图
+</title>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<!-- 加载OpenLayers 类库 -->
+<script type="text/javascript" src="http://www.openlayers.cn/olapi/OpenLayers.js">
+<!-- <script type="text/javascript" src="${urls.getForLookupPath('/static/js/gis/OpenLayers.js')}">
+ --></script>
+<style>
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
+</style>
+<!-- 关键代码在这里了 -->
+<!-- <script type="text/javascript">
+function init() {
+// 使用指定的文档元素创建地图
+var map = new OpenLayers.Map("rcp1_map");
+// 创建一个 OpenStreeMap raster layer
+// 把这个图层添加到map中
+var osm = new OpenLayers.Layer.OSM();
+map.addLayer(osm);
+// 设定视图缩放地图程度为最大
+map.zoomToMaxExtent();
+}
+</script> -->
+<script type="text/javascript">
+      var lon = 5;    //x-axis coodinate in map units
+      var lat = 40;   //y-axis coordinate in map units
+      var zoom = 5;   //number of zoom levels
+      var map, layer; 
+　　//声明变量map、layer；等同于 var map = null; var layer = null;
+      map = new OpenLayers.Map('map');
+      //实例化一个地图类OpenLayers.Map
+      layer = new OpenLayers.Layer.WMS( "OpenLayers WMS", 
+                  "http://labs.metacarta.com/wms/vmap0", {layers: 'basic'} );
+      //以WMS的格式实例化图层类OpenLayers.Layer
+      map.addLayer(layer);
+      map.zoomToExtent(newOpenLayers.Bounds(-3.922119,44.335327,
+      4.866943,49.553833));
+　　//在Map对象上加载Layer对象，并用map.zoomToExtent函数使地图合适地显示
+　　map.addLayer(new OpenLayers.Layer.GML("GML", "gml/polygon.xml"));  
+</script>
+</head>
+
+<body onload="init()">
+<div id="rcp1_map" style="width: 100%;
+height: 100%;">
+</div>
+</body>
+
+</html>

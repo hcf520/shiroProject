@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excels>
+	<excel id="employee" class="org.easy.web.ExcelModel.EmployeeModel"
+		sheetname="员工信息列表" defaultColumnWidth="5000" enableStyle="true">
+		<field name="id" title="ID" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" />
+		<field name="createTime" title="入职时间" pattern="yyyy/MM/dd"
+			isNull="true" uniformStyle="true" columnWidth="5000" />
+		<field name="name" title="姓名" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" />
+		<field name="sex" title="性别" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" format="1:女,0:男" />
+		<field name="age" title="年龄" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" regex="^[1-9]\d*$"
+			regexErrMsg="必须是数字" />
+		<field name="mobile" title="手机" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" regex="^[1][3,4,5,8][0-9]{9}$"
+			regexErrMsg="格式错误" />
+		<field name="status" title="在职状态" align="center" isNull="true"
+			uniformStyle="true" columnWidth="5000" format="1:离职,0:在职" />
+	</excel>
+</excels>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shiroDemo.shiroProject.mapper.UserMapper">
+	<resultMap id="UserResult" type="com.shiroDemo.shiroProject.entity.User">
+		<id column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="userpwd" property="userpwd" jdbcType="VARCHAR" />
+		<result column="permissionlevel" property="permissionlevel"
+			jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<collection property="roles"
+			ofType="com.shiroDemo.shiroProject.entity.Role">
+			<id property="rid" column="rid" />
+			<result property="rname" column="rname" />
+			<collection property="modules"
+				ofType="com.shiroDemo.shiroProject.entity.Module">
+				<id property="mid" column="mid" />
+				<result property="mname" column="mname" />
+			</collection>
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		uid, username, userpwd, permissionlevel
+	</sql>
+	<select id="queryUserByUsername" parameterType="string" resultMap="UserResult">
+		SELECT u.*,r.*,m.* FROM user u 
+		inner join user_role ur on ur.permissionlevel=u.permissionlevel
+		inner join role r on r.rid=ur.rid
+		inner join module_role mr on mr.rid=r.rid
+		inner join module m on mr.mid=m.mid
+		WHERE username=#{username};
+	</select>
+	<insert id="insertUser" parameterType="com.shiroDemo.shiroProject.entity.User"
+		useGeneratedKeys="true" keyProperty="uid">
+		insert into user(uid,username,userpwd,permissionlevel,name,state)
+		values(#{uid},#{username},#{userpwd},#{permissionlevel},#{name},#{state});
+	</insert>
+</mapper>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>index</title>
+</head>
+<body>
+<h1>欢迎"${user.name}"光临!请选择你的操作:</h1><br>
+    <ul>
+        <shiro:hasPermission name="add"><li>增加</li></shiro:hasPermission>
+        <shiro:hasPermission name="delete"><li>删除</li></shiro:hasPermission>
+        <shiro:hasPermission name="update"><li>修改</li></shiro:hasPermission>
+        <shiro:hasPermission name="query"><li>查询</li></shiro:hasPermission>
+        <li><a href="/gis/openlayers">进入GIS模块</a></li>
+        <li><a shiro:hasRole="admin" href="/excel/targetExcel">进入Excel模块</a></li>
+    </ul>
+        <a href="/index/logOut">点我注销</a>
+</body>
+</html>
